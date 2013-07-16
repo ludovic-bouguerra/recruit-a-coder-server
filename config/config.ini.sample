@@ -1,0 +1,5 @@
+; E-codigo configuration
+; (c) 2013 Ludovic Bouguerra
+ecodigo.java.home=/usr/bin/
+ecodigo.messenging.url=tcp://localhost:61616
+ecodigo.messenging.queuename=client.messages
