@@ -12,7 +12,7 @@ public interface ILanguage {
 
 	/**
 	 * 
-	 * @param code : Code à exécuter
+	 * @param code : Code a executer
 	 */
 	public String execute(String code, Collection<String> inputData, Collection<String> expectedResult) throws UnexpectedResult;
 	
