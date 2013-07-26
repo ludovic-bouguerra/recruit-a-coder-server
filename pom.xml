@@ -22,7 +22,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>fr.ludovicbouguerra.ecodigo.controller.CompilationController</mainClass>
+							<mainClass>fr.ludovicbouguerra.ecodigo.main.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
