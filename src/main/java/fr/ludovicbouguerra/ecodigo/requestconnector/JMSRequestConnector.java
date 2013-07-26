@@ -19,6 +19,7 @@ import org.apache.activemq.broker.BrokerService;
 import fr.ludovicbouguerra.ecodigo.language.UnexpectedResult;
 import fr.ludovicbouguerra.ecodigo.messageprotocol.LanguageNotFound;
 import fr.ludovicbouguerra.ecodigo.messageprotocol.MessageProtocol;
+import fr.ludovicbouguerra.ecodigo.messageprotocol.ParametersException;
 
 public class JMSRequestConnector implements IRequestConnector, MessageListener{
 
@@ -45,7 +46,7 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 	public void onMessage(Message message) {
 		try {
 			Message response = this.session.createMessage();
-
+			System.out.println("ok");
 			try {
 				response.setStringProperty("response-type",
 						"ok");
@@ -59,8 +60,10 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 						e.getMessage());
 
 			} catch (LanguageNotFound e) {
-				
+				System.out.println("ok");
 
+			} catch (ParametersException e) {
+				System.out.println("ol");
 			}
 
 			// Set the correlation ID from the received message to be the
@@ -89,6 +92,7 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 			broker.setUseJmx(false);
 			broker.addConnector(messageBrokerUrl);
 			broker.start();
+			
 		} catch (Exception e) {
 			// Handle the exception appropriately
 		}

@@ -27,7 +27,7 @@ public class Launcher implements Callable<Boolean>{
 
 	private static Logger logger = Logger.getLogger(Launcher.class.getName());
 	
-	
+	private Process process;
 	private ArrayList<String> parameters;
 	private String errorResponse;
 	private String response;
@@ -64,7 +64,8 @@ public class Launcher implements Callable<Boolean>{
 			throw new UnexpectedResult(e.getMessage());
 			
 		}finally{
-			 executor.shutdownNow();
+			process.destroy();
+			executor.shutdownNow();
 		}
 		
 	}
@@ -84,7 +85,7 @@ public class Launcher implements Callable<Boolean>{
 		logger.fine("launching compilation");
 		ProcessBuilder builder = new ProcessBuilder(parameters);		
 
-		Process process = builder.start();
+		process = builder.start();
 		
 		StreamParser esp = new StreamParser(process.getErrorStream());
 		esp.start();
@@ -128,6 +129,8 @@ class StreamParser extends Thread{
 			while ((line = br.readLine ()) != null) {
 			    result += line + "\n";
 			}
+			if (result.length() > 1)
+				result = result.substring(0, result.length()-1);
 			br.close();
 
 		} catch (IOException e) {

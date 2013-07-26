@@ -13,7 +13,7 @@ public class EqualsComparator implements IComparator{
 		System.out.println("result compare");
 		System.out.println(expected);
 		System.out.println(actual);
-		return expected.equals(actual);
+		return expected.equals(actual) || expected.equals(actual+"\n");
 	}
 
 }
