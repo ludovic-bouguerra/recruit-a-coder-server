@@ -6,8 +6,8 @@ package fr.ludovicbouguerra.ecodigo.sourcecreator;
  * 
  *
  */
-public class SourceCreatorFactory {
-	private static SourceCreatorFactory instance;
+public class SourceCreatorFactory implements ISourceCreatorFactory{
+	private static ISourceCreatorFactory instance;
 	
 	private SourceCreatorFactory(){
 		
@@ -17,7 +17,7 @@ public class SourceCreatorFactory {
 		return new SourceCreator(name, extension, code);
 	}
 	
-	public static SourceCreatorFactory getInstance(){
+	public static ISourceCreatorFactory getInstance(){
 		if (instance == null){
 			instance = new SourceCreatorFactory();
 		}

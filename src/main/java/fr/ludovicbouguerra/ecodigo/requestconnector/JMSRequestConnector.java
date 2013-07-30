@@ -23,7 +23,7 @@ import fr.ludovicbouguerra.ecodigo.messageprotocol.ParametersException;
 
 public class JMSRequestConnector implements IRequestConnector, MessageListener{
 
-	private EventListenerList listeners;
+	private EventListenerList listeners = new EventListenerList();
 	
 	private static int ackMode = Session.AUTO_ACKNOWLEDGE;
 	private static String messageQueueName;
