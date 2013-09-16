@@ -23,25 +23,26 @@ Launching a test.
 
 Installing the sofware
 ======================
-’’’
+```
 mvn install
-’’’
+```
 
 The application will be available on the target dir.
 
 You have to configure the application with the config.ini file following these instructions :
 Rename in directory config.ini.sample to config.ini and modify settings.
-’’’
+```
 ; E-codigo configuration
 ; (c) 2013 Ludovic Bouguerra
 ecodigo.java.home=/usr/bin/
 ecodigo.messenging.url=tcp://localhost:61616
 ecodigo.messenging.queuename=client.messages
-’’’
+```
 
 After you can run the application launching the following command :
-’’’
+```
 java -jar NAME 
-’’’
+```
+
 
 To run this application in a production mode you have to put it on a service.
