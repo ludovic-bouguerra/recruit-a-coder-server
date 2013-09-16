@@ -19,6 +19,12 @@ Architecture
 
 ![ScreenShot](http://www.ludovicbouguerra.fr/wp-content/uploads/2013/09/presentation.png)
 
+Class Diagram
+=============
+![ScreenShot](http://www.ludovicbouguerra.fr/wp-content/uploads/2013/09/UML.png)
+
+
+
 Comming soon.
 
 Launching a test.
