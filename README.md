@@ -1,5 +1,5 @@
-Recruit a coder plateform : 
-===========================
+Recruit a coder plateform server part
+=====================================
 
 [![Build Status](https://travis-ci.org/ludovic-bouguerra/ecodigo-server.png?branch=master)](https://travis-ci.org/ludovic-bouguerra/ecodigo-server)
 
