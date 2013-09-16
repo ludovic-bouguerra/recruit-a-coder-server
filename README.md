@@ -16,6 +16,9 @@ You can find the client part in another repository. https://github.com/ludovic-b
 
 Architecture
 =============
+
+![ScreenShot](http://www.ludovicbouguerra.fr/wp-content/uploads/2013/09/presentation.png)
+
 Comming soon.
 
 Launching a test.
