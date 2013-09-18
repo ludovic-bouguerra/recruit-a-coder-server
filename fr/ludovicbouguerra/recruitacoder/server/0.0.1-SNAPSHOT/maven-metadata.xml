@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>fr.ludovicbouguerra.recruitacoder</groupId>
+  <artifactId>server</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20130918.114100</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20130918114100</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.0.1-20130918.114100-1</value>
+        <updated>20130918114100</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.0.1-20130918.114100-1</value>
+        <updated>20130918114100</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>executable</classifier>
+        <extension>zip</extension>
+        <value>0.0.1-20130918.114100-1</value>
+        <updated>20130918114100</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
