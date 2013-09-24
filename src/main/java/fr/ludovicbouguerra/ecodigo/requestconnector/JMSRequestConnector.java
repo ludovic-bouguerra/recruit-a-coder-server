@@ -1,5 +1,7 @@
 package fr.ludovicbouguerra.ecodigo.requestconnector;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.jms.Connection;
@@ -21,10 +23,10 @@ import fr.ludovicbouguerra.ecodigo.messageprotocol.LanguageNotFound;
 import fr.ludovicbouguerra.ecodigo.messageprotocol.MessageProtocol;
 import fr.ludovicbouguerra.ecodigo.messageprotocol.ParametersException;
 
-public class JMSRequestConnector implements IRequestConnector, MessageListener{
+public class JMSRequestConnector implements IRequestConnector, MessageListener {
 
 	private EventListenerList listeners = new EventListenerList();
-	
+
 	private static int ackMode = Session.AUTO_ACKNOWLEDGE;
 	private static String messageQueueName;
 	private static String messageBrokerUrl;
@@ -33,20 +35,21 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 	private boolean transacted = false;
 	private MessageProducer replyProducer;
 	private MessageProtocol messageProtocol;
-	
-	
-	public void init(Properties properties){
+
+	public void init(Properties properties) {
 		messageBrokerUrl = properties.getProperty("ecodigo.messenging.url");
-		messageQueueName = properties.getProperty("ecodigo.messenging.queuename");
+		messageQueueName = properties
+				.getProperty("ecodigo.messenging.queuename");
 		ackMode = Session.AUTO_ACKNOWLEDGE;
 	}
-	
-	
+
 	@Override
 	public void onMessage(Message message) {
 		try {
-			Message response = this.session.createMessage();
-			System.out.println("ok");
+			Message response = null;
+
+			response = this.session.createMessage();
+			
 			try {
 				response.setStringProperty("response-type",
 						"ok");
@@ -72,16 +75,18 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 			// if it has more than
 			// one outstanding message to the server
 			response.setJMSCorrelationID(message.getJMSCorrelationID());
+			System.out.println("Avant envoyée");
 
 			// Send the response to the Destination specified by the JMSReplyTo
 			// field of the received message,
 			// this is presumably a temporary queue created by the client
 			this.replyProducer.send(message.getJMSReplyTo(), response);
+			System.out.println("Réponse envoyée");
 		} catch (JMSException e) {
 			// Handle the exception appropriately
 
 		}
-}
+	}
 
 	@Override
 	public void listen() {
@@ -92,7 +97,7 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 			broker.setUseJmx(false);
 			broker.addConnector(messageBrokerUrl);
 			broker.start();
-			
+
 		} catch (Exception e) {
 			// Handle the exception appropriately
 		}
@@ -126,22 +131,22 @@ public class JMSRequestConnector implements IRequestConnector, MessageListener{
 		} catch (JMSException e) {
 			// Handle the exception appropriately
 		}
-		
+
 	}
 
-	protected void fireNewRequest(IRequest request){
-		for (IRequestListener req : getRequestListeners()){
+	protected void fireNewRequest(IRequest request) {
+		for (IRequestListener req : getRequestListeners()) {
 			req.onNewRequest(request);
 		}
 	}
-	
-	public IRequestListener[] getRequestListeners(){
+
+	public IRequestListener[] getRequestListeners() {
 		return listeners.getListeners(IRequestListener.class);
 	}
-	
+
 	@Override
 	public void addRequestListener(IRequestListener requestListener) {
 		listeners.add(IRequestListener.class, requestListener);
-		
+
 	}
 }

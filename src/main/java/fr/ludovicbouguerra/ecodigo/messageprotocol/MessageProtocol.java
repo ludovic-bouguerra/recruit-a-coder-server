@@ -1,7 +1,5 @@
 package fr.ludovicbouguerra.ecodigo.messageprotocol;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.logging.Logger;
 
 import javax.jms.JMSException;
@@ -9,6 +7,8 @@ import javax.jms.Message;
 
 import fr.ludovicbouguerra.ecodigo.language.LanguageFactory;
 import fr.ludovicbouguerra.ecodigo.language.UnexpectedResult;
+import fr.ludovicbouguerra.ecodigo.resultcomparator.ComparatorFactory;
+import fr.ludovicbouguerra.ecodigo.resultcomparator.SourceComparatorFactory;
 
 /**
  * 
@@ -24,13 +24,16 @@ public class MessageProtocol {
     	if (message.getStringProperty("language").equals("java")){
     		logger.fine("Reading message variable");
         	String code = message.getStringProperty("code");
-        	Object inputData = message.getObjectProperty("input-data");
-        	Object expectedResult = message.getObjectProperty("expected-result");
+        	String inputData = message.getStringProperty("input-data");
+        	String expectedResult = message.getStringProperty("expected-result");
         	logger.fine("End reading message variable");
         	System.out.println(code);
-        	System.out.println(Arrays.toString(((Collection<String>) inputData).toArray()));
-        	System.out.println(Arrays.toString(((Collection<String>) expectedResult).toArray()));
-            return LanguageFactory.getInstance().createJavaLanguage().execute(code, (Collection<String>)inputData, (Collection<String>)expectedResult); 	
+
+            
+        	
+        	String result = LanguageFactory.getInstance().createJavaLanguage().execute(code, inputData);
+        	return SourceComparatorFactory.getInstance().createSourceComparator().compare(ComparatorFactory.getInstance().createEqualsComparator(), inputData, result, expectedResult);
+        	
         }else{
         	throw new LanguageNotFound();	
         }

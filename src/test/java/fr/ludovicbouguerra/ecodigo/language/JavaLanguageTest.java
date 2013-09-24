@@ -34,12 +34,7 @@ public class JavaLanguageTest {
 							"}\n"+
 						"}\n";
 		
-		Collection<String> input = new ArrayList<String>();
-		input.add("test");
-		
-		Collection<String> expected = new ArrayList<String>();
-		expected.add("Salut\ntest\n");
-		language.execute(codigo, input,expected);
+		language.execute(codigo, "test");
 	}
 	
 
@@ -69,7 +64,7 @@ public class JavaLanguageTest {
 		Collection<String> expected = new ArrayList<String>();
 		expected.add("Salut\ntest\n");
 		try{
-			language.execute(codigo, input,expected);
+			language.execute(codigo, "test");
 		}catch(UnexpectedResult e){
 		}
 	}
@@ -92,14 +87,24 @@ public class JavaLanguageTest {
 						
 							"}\n"+
 						"}\n";
-		
-		Collection<String> input = new ArrayList<String>();
-		input.add("test");
-		
-		Collection<String> expected = new ArrayList<String>();
-		expected.add("Salut\ntest\n");
+
 		try{
-			language.execute(codigo, input,expected);
+			language.execute(codigo, "test");
+		}catch(UnexpectedResult e){
+			Assert.assertEquals("Timeout Exception : null", e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testCompilationError(){
+		
+		ILanguage language = new JavaLanguage();
+		String codigo = "\n";
+		
+		try{
+			language.execute(codigo, "test");
+			//Assert.fail();
 		}catch(UnexpectedResult e){
 			Assert.assertEquals("Timeout Exception : null", e.getMessage());
 		}

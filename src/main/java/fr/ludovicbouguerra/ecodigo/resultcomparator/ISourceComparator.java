@@ -1,13 +1,14 @@
 package fr.ludovicbouguerra.ecodigo.resultcomparator;
 
-import java.util.Collection;
+import fr.ludovicbouguerra.ecodigo.language.UnexpectedResult;
 
-import fr.ludovicbouguerra.ecodigo.result.IResult;
+
 
 public interface ISourceComparator {
 	
 	
-	public Collection<IResult> compare(IComparator comprator, Collection<String> inputData, Collection<String> result,
-			Collection<String> expectedResult);
+	public String compare(IComparator comprator,
+			String inputData, String result,
+			String expectedResult) throws UnexpectedResult;
 	
 }
